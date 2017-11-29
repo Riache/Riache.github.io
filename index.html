@@ -1,43 +1,113 @@
-<hmtl>
+<html>
 	<head>
+		<meta charset="UTF-8">
+		<title> Revisão </title>
+		
+	<style>
+	#c {background-color: black;}
+	</style>	
 
-	</head>
+	<script>
+
+		const RAIO = 50
+		const MAX = 500
+		const VEL = 1
+
+		var bolinhas = new Array(MAX)
+
+		for (var k=0; k<MAX; k++) {
+			bolinhas[k] = new Array(0, 0, sortearCor(), sortear(1), sortear(1))
+		}
+
+		//bolinhas[0] = new Array(0,0,'blue' ,  -2 , 2)
+		//bolinhas[1] = new Array(0,0,'red'  ,  2 , -2)
+		//bolinhas[2] = new Array(0,0,'green',  -2 , -2)
+
+		setInterval(desenhar, VEL)
+
+		function sortear(limite) {
+			return Math.random() * limite
+		}
+
+
+		function sortearCor() {
+
+			var r = parseInt(sortear(255))
+			var g = parseInt(sortear(255))
+			var b = parseInt(sortear(255))
+
+			return "rgb(" + r + "," + g + "," + b + ")"
+		}
+
+		function limpar(c) {
+
+			c.width = c.width
+			c.height = c.height
+
+		}
+
+		function bolinha(x, y, raio, cor, ctx) {
+
+			ctx.beginPath()
+			ctx.fillStyle = cor
+			ctx.arc(x, y, raio, 0*Math.PI, 2*Math.PI)
+			ctx.fill()
+
+		}
+
+		//var px = 50
+		//var py = 300
+		//var incX = 10
+		//var incY = 10
+
+		function desenhar() {
+
+			var desenho = document.getElementById("c")
+			var contexto = desenho.getContext("2d")
+
+			// se fizer comentário no limpar ele deixa rastro
+			//limpar(desenho)
+
+			for(var b=0; b<MAX; b++) {
+
+				var x 	 = bolinhas[b][0]
+				var y 	 = bolinhas[b][1]
+				var cor  = bolinhas[b][2]
+				var incX = bolinhas[b][3]
+				var incY = bolinhas[b][4]
+
+				bolinha(x, y, RAIO, sortearCor(), contexto)
+
+				x = x + incX
+				y = y + incY
+
+				if (x < 0 || x > desenho.width)
+					incX = incX * -1
+
+				if (y < 0 || y > desenho.height)
+					incY = incY * -1
+
+				bolinhas[b][0] = x
+				bolinhas[b][1] = y
+				bolinhas[b][3] = incX
+				bolinhas[b][4] = incY
+			}
+
+     	}
+
+
+	</script>
+		
+	</head>	
+
+
 	<body>
+		<canvas id="c" width="1500" height="765" style="border: 1px dotted"> </canvas>
 
-	<h1 id="top"> Star BUGS Coffe </h1>
-	<h2> Bebidas </h2>
-	<h3> Blend da Casa - R$ 3,50 </h3>
-	<a href="https://www.youtube.com/watch?v=j-WMVHFOZys" target="_blank"> <img src="http://2.bp.blogspot.com/-9pBp6dM7VUo/UHbyc9znAjI/AAAAAAAACZs/yBY2G3advV4/s1600/CAF%C3%89.png" height="100" width="100"> </a>
-	<p> Uma mistura suave e delicada de cafés da <a href="https://pt.wikipedia.org/wiki/Col%C3%B4mbia" target="_blank"> Colômbia</a>, <a href="https://pt.wikipedia.org/wiki/Costa_Rica" target="_blank">
-	Costa Rica </a> e ilha de <a href="https://pt.wikipedia.org/wiki/Java"target="_blank"> Java</a>.
-	<h3> Café com Leite - R$ 4,30 </h3>
-	<a href="https://www.youtube.com/watch?v=FooMNomiIeI" target="_blank"> <img src="http://cafebrasileiro.com/wp-content/uploads/2016/03/Caf%C3%A9-com-leite-de-coco.png" height="100" width="100"> </a> <br>
-	Uma mistura de leite fervido com um expresso curto e chocolate amargo.
-	Uma mistura de leite fervido com um <a href="http://www.simoesfilhoonline.com.br/wp-content/uploads/2017/01/EC_integracao_retiro_salvador_20160530_011955-850x567.jpg" target="_blank"> expresso </a> curto e chocolate amargo.
-	<h3> Cappucino Chinês - R$4,99 </h3>
-	<a href="https://www.youtube.com/watch?v=OcS4qOFByZ0" target="_blank"> <img src="http://www.pngpix.com/wp-content/uploads/2016/10/PNGPIX-COM-Cappuccino-PNG-Transparent-Image.png" height="100" width="100"> </a> <br>
-	Um expresso curto com leite fervido e <a href="http://g1.globo.com/videos/v/g1/5935832/" target="_blank"> espuma Milenar</a>.
-	Esta bebida é preparada com a mesma <a href="https://www.youtube.com/watch?v=prMBoGtMyRU" target="_blank"> técnica</a> chinesa inventanda no fim do <a href="https://pt.wikipedia.org/wiki/S%C3%A9culo_XVII" target="_blank"> século 17</a>.
-	<h3> Chá Preto do Himalaia - R$ 29,99 </h3>
-	<a href="https://www.youtube.com/watch?v=U5-dZqnAOM0" target="_blank"> <img src="https://www.saudemelhor.com/wp-content/uploads/2015/01/cha-preto.jpg" height="100" width="100"> </a>
-	<p> Apenas um chá <a href="http://atl.clicrbs.com.br/pretinhobasico/2015/01/13/alguns-alimentos-que-viraram-gourmet-so-pra-voce-pagar-mais-caro/" target="_blank"> Gourmet</a> </p> <br>
-	<h2> Métodos de Pagamento </h2>
-	<p> . Dinheiro </p>
-	<p> . Cheque </p>
-	<p> . Cartões de Crédito <br>
-			* MasterCard <br> <img src="http://www.pngall.com/wp-content/uploads/2016/07/Mastercard-PNG-Clipart.png" height="50" width="50"> <br>
-			* Visa <br> <img src="https://vignette.wikia.nocookie.net/uncyclopedia/images/4/4b/Visa.png/revision/latest?cb=20071013130545" height="50" width="50"> <br>
-			* American Express </p> <br> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/American_Express_logo.svg/1024px-American_Express_logo.svg.png" height="50" width="50">
-	<h2> Como fazer meu pedido? </h2>
-	<p> 1. Entre na fila <br>
-		2. Faça o seu pedido <br>
-		3. Pague <br>
-		4. Aguarde você ser chamado pelo nome</p>	<br> <br> <br> <br> 
-	<h2> Sobre a empresa </h2>	
-	<p> O Star BUG Coffe nasceu em 2017 após um erro de código. Conheça nossa <a href="missao.html" target="_blank"> missão</a>.</p>
-	<h2> Contato </h2> 
-	<p> Venha tomar um café conosco na rua 666, número 666 - Hell ou nos envie um email para <a href="email.html" target="_blank">meiameiameia@starbugcoffe.com.66 </a> </p>
-	<a href="#top"> SUBIR PÁGINA </a>
 
-	</body>
+	</body>	
+
+
+
 </html>
+
